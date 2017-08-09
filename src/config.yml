@@ -1,0 +1,13 @@
+prefix: "&8[&cClasses&8]"
+noPermission: "&cYou don't have permission to do that"
+join: "&aYou joined the class &6{classname}"
+leave: "&cYou left the class &6{classname}"
+noClassesActive: "&cThere are no active classes"
+classStartingBroadcast: "&6{classname} &aclass is starting. Join with &6/class join"
+classEndingBroadcast: "&6{classname} &cclass is ending"
+alreadyJoined: "&cYou are already in the &6{classname} &cclass"
+playerInNoClass: "&cYou did not join the current class"
+listClasses: "&7These are the registered classes:"
+raiseHand: "&6{playername} &7raised his hand"
+handTimeoutMessage: "&cYou must wait &6{time} Seconds &cbefore you can raise your hand again"
+handTimeout: 10

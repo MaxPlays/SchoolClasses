@@ -1,0 +1,30 @@
+name: Classes
+author: Max_Plays
+version: 1.1
+main: me.MaxPlays.Classes.main.Classes
+commands:
+  class:
+    description: Main Command
+    usage: /class
+  rh:
+    description: Raise hand
+    usage: /rh
+    aliases: [raisehand]
+
+permissions:
+  class.*:
+    description: Everything
+    children:
+      class.create: true
+      class.start: true
+      class.remove: true
+      class.join: true
+      class.leave: true
+      class.end: true
+      class.raisehand: true
+  class.default:
+    description: Admin Commands
+    children:
+      class.join: true
+      class.leave: true
+      class.raisehand: true
