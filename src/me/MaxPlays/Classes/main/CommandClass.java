@@ -1,9 +1,12 @@
 package me.MaxPlays.Classes.main;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /**
 * Created by Max_Plays on 10.06.2017
@@ -49,13 +52,25 @@ public class CommandClass implements CommandExecutor {
 					for(Class c: Class.getClasses()){
 						if(Class.classActive()){
 							if(Class.getActiveClass().equals(c)){
-								p.sendMessage("ง8- งa" + c.getName());
+								p.sendMessage("ยง8- ยงa" + c.getName());
 								continue;
 							}
 						}
-						p.sendMessage("ง8- ง7" + c.getName());
+						p.sendMessage("ยง8- ยง7" + c.getName());
 					}
-					
+
+				}else if(args[0].equalsIgnoreCase("book")) {
+					if(p.hasPermission("class.book")){
+						if(Class.classActive()){
+							for(String s: Class.getActiveClass().getPlayers())
+								Bukkit.getPlayer(s).getInventory().addItem(new ItemStack(Material.BOOK_AND_QUILL));
+							p.sendMessage(Classes.prefix + "You gave a book to every player in the current class");
+						}else{
+							p.sendMessage(Classes.prefix + Translation.noclass);
+						}
+					}else{
+						p.sendMessage(Classes.prefix + Translation.noperm);
+					}
 				}else{
 					sendHelp(p);
 				}
@@ -65,7 +80,7 @@ public class CommandClass implements CommandExecutor {
 					if(p.hasPermission("class.create")){
 						if(!Class.classExists(arg)){
 							new Class(arg, p.getLocation());
-							p.sendMessage(Classes.prefix + "You have created the class ง6" + arg);
+							p.sendMessage(Classes.prefix + "You have created the class ยง6" + arg);
 						}else{
 							p.sendMessage(Classes.prefix + "That class already exists");
 						}
@@ -73,10 +88,10 @@ public class CommandClass implements CommandExecutor {
 						p.sendMessage(Classes.prefix + Translation.noperm);
 					}
 				}else if(args[0].equalsIgnoreCase("start")){
-					
+
 					if(p.hasPermission("class.start")){
 						if(Class.classExists(arg)){
-							p.sendMessage(Classes.prefix + "Starting class ง6" + arg);
+							p.sendMessage(Classes.prefix + "Starting class ยง6" + arg);
 							Class.startClass(arg);
 						}else{
 							p.sendMessage(Classes.prefix + "That class does not exist");
@@ -84,12 +99,12 @@ public class CommandClass implements CommandExecutor {
 					}else{
 						p.sendMessage(Classes.prefix + Translation.noperm);
 					}
-					
+
 				}else if(args[0].equalsIgnoreCase("remove")){
 					if(p.hasPermission("class.remove")){
 						if(Class.classExists(arg)){
 							Class.deleteClass(arg);
-							p.sendMessage(Classes.prefix + "The class ง6" + arg + " ง7was deleted");
+							p.sendMessage(Classes.prefix + "The class ยง6" + arg + " ยง7was deleted");
 						}else{
 							p.sendMessage(Classes.prefix + "That class does not exist");
 						}
@@ -103,25 +118,27 @@ public class CommandClass implements CommandExecutor {
 				sendHelp(p);
 			}
 		}
-		
+
 		return true;
 	}
 
 	private void sendHelp(Player p){
-		p.sendMessage("ง7------------------- ง8[งcClassesง8] ง7-------------------");
-		p.sendMessage("ง7Plugin developed by งaMax_Plays");
+		p.sendMessage("ยง7------------------- ยง8[ยงcClassesยง8] ยง7-------------------");
+		p.sendMessage("ยง7Plugin developed by ยงaMax_Plays");
 		if(p.hasPermission("class.join"))
-			p.sendMessage("งc/class join ง7Join a class");
+			p.sendMessage("ยงc/class join ยง7Join a class");
 		if(p.hasPermission("class.leave"))
-			p.sendMessage("งc/class leave ง7Leave class");
+			p.sendMessage("ยงc/class leave ยง7Leave class");
 		if(p.hasPermission("class.create"))
-			p.sendMessage("งc/class create <Name> ง7Create class");
+			p.sendMessage("ยงc/class create <Name> ยง7Create class");
 		if(p.hasPermission("class.start"))
-			p.sendMessage("งc/class start <Name> ง7Start class");
+			p.sendMessage("ยงc/class start <Name> ยง7Start class");
 		if(p.hasPermission("class.remove"))
-			p.sendMessage("งc/class remove <Name> ง7Remove class");
+			p.sendMessage("ยงc/class remove <Name> ยง7Remove class");
 		if(p.hasPermission("class.end"))
-			p.sendMessage("งc/class end ง7End class");
+			p.sendMessage("ยงc/class end ยง7End class");
+		if(p.hasPermission("class.book"))
+			p.sendMessage("ยงc/class book ยง7Send a book to everyone in your class");
 	}
 	
 }
